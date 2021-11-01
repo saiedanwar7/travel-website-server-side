@@ -24,6 +24,7 @@ async function run() {
     const database = client.db("tourism_site");
     const packagesCollection = database.collection("packages");
     const bookingsCollection = database.collection("bookings");
+    const experiencesCollection = database.collection('experiences');
     console.log("Message - database connected");
 
     // work start from here
@@ -110,7 +111,15 @@ async function run() {
 
     })
 
-
+    //------- Get ---------
+    
+        //experience collection
+        app.get('/experiences', async (req, res) => {
+            const cursor = experiencesCollection.find({});
+            const experiences = await cursor.toArray();
+            console.log(experiences);
+            res.send(experiences);
+        });
 
 
   } finally {
